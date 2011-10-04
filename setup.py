@@ -14,7 +14,7 @@ setup(
     author='Daniel Lindsley',
     author_email='daniel@toastdriven.com',
     url='http://github.com/claudiobi/django-tastypie/',
-    long_description=open('README.rst', 'r').read(),
+    long_description='Tastypie fixed with File Upload and ModelFormValidation',
     packages=[
         'tastypie',
         'tastypie.utils',
