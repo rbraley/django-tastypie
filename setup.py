@@ -8,12 +8,12 @@ except ImportError:
     from setuptools import setup
 
 setup(
-    name='django-tastypie',
+    name='django-tastypie-with-file-upload-and-model-form-validation',
     version='1.0.0-beta',
     description='A flexible & capable API layer for Django.',
     author='Daniel Lindsley',
     author_email='daniel@toastdriven.com',
-    url='http://github.com/toastdriven/django-tastypie/',
+    url='http://github.com/claudiobi/django-tastypie/',
     long_description=open('README.rst', 'r').read(),
     packages=[
         'tastypie',
