@@ -254,6 +254,9 @@ class Resource(object):
         data = {
             "error_message": getattr(settings, 'TASTYPIE_CANNED_ERROR', "Sorry, this request could not be processed. Please try again later."),
         }
+        # If the exception comes with an error, show that one
+        if getattr(exception, 'message', None):
+            data["error_message"] = exception.message
         desired_format = self.determine_format(request)
         serialized = self.serialize(request, data, desired_format)
         return response_class(content=serialized, content_type=build_content_type(desired_format))
@@ -328,7 +331,7 @@ class Resource(object):
             options['callback'] = callback
 
         return self._meta.serializer.serialize(data, format, options)
-    
+
     def deserialize(self, request, format=None):
         """
         Given a request, data and a format, deserializes the given data.
@@ -340,7 +343,7 @@ class Resource(object):
         """
         if format is None:
             format = request.META.get('CONTENT_TYPE', 'application/json')
-        
+
         if format == 'application/x-www-form-urlencoded':
             deserialized = request.POST
         elif format.startswith('multipart'):
@@ -348,7 +351,7 @@ class Resource(object):
             deserialized.update(request.FILES)
         else:
             deserialized = self._meta.serializer.deserialize(request.raw_post_data, format=format)
-        
+
         return deserialized
 
     def alter_list_data_to_serialize(self, request, data):
