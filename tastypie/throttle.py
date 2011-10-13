@@ -80,7 +80,11 @@ class CacheThrottle(BaseThrottle):
         
         # Make sure something is there.
         cache.add(key, [])
-        
+
+        # If the cache is dummy, let them through
+        if not cache.has_key(key):
+            return False
+
         # Weed out anything older than the timeframe.
         minimum_time = int(time.time()) - int(self.timeframe)
         times_accessed = [access for access in cache.get(key) if access >= minimum_time]
