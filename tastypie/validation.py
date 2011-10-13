@@ -167,3 +167,30 @@ class ModelFormValidation(FormValidation):
         if form.is_valid():
             return {}
         return form.errors
+
+
+
+###############################################################################
+
+# The following is an addition
+
+class FormValidationExcluding(FormValidation):
+    """
+    An extension of FormValidation that allows to specify a list of fields
+    that should not be validated. This is useful for ForeignKey, as the
+    validation would fail if passed by ID rather than URL, because their
+    actual URL is built by alter_deserialized_detail_data AFTER validation
+    has taken place.
+    """
+    def __init__(self, **kwargs):
+        if 'exclude' in kwargs:
+            self.exclude = kwargs.pop('exclude')
+        else:
+            self.exclude = []
+        super(FormValidationExcluding, self).__init__(**kwargs)
+
+    def is_valid(self, bundle, request=None):
+        errors = super(FormValidationExcluding, self).is_valid(bundle, request)
+        for field_not_to_validate in self.exclude:
+            errors.pop(field_not_to_validate, None)
+        return errors

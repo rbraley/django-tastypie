@@ -14,7 +14,7 @@ setup(
     author='Daniel Lindsley',
     author_email='daniel@toastdriven.com',
     url='http://github.com/claudiobi/django-tastypie/',
-    long_description='Tastypie with File Upload, ModelFormValidation, Error 500 description',
+    long_description='Tastypie with File Upload, ModelFormValidation, Error 500 description, Throttle with DummyCache, FormValidationExcluding',
     packages=[
         'tastypie',
         'tastypie.utils',
