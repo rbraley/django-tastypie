@@ -9,17 +9,18 @@ except ImportError:
 
 setup(
     name='django-tastypie-with-file-upload-and-model-form-validation',
-    version='1.0.0-beta',
+    version='0.9.11',
     description='A flexible & capable API layer for Django.',
     author='Daniel Lindsley',
     author_email='daniel@toastdriven.com',
-    url='http://github.com/claudiobi/django-tastypie/',
+    url='http://github.com/rbraley/django-tastypie/',
     long_description='Tastypie with File Upload, ModelFormValidation, Error 500 description, Throttle with DummyCache, FormValidationExcluding',
     packages=[
         'tastypie',
         'tastypie.utils',
         'tastypie.management',
         'tastypie.management.commands',
+        'tastypie.migrations',
     ],
     package_data={
         'tastypie': ['templates/tastypie/*'],
